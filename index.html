@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Portfolio - BUT R&T Cybersécurité</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #3b82f6;
+            --accent: #10b981;
+            --background: #f8fafc;
+            --surface: #ffffff;
+            --text-main: #334155;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #94a3b8;
+            font-size: 1.2rem;
+        }
+
+        /* Navigation Tabs */
+        nav {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--secondary);
+        }
+
+        .tab-btn.active {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .level-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .level-header h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .global-reflexion {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-left: 4px solid var(--accent);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .global-reflexion h3 {
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            margin-bottom: 1rem;
+        }
+
+        .ac-code {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .card h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            line-height: 1.3;
+        }
+
+        .badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .card-body {
+            flex-grow: 1;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .card-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn-link {
+            text-decoration: none;
+            color: var(--secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn-link:hover {
+            text-decoration: underline;
+            color: #2563eb;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mon E-Portfolio</h1>
+        <p>BUT Réseaux et Télécommunications - Parcours Cybersécurité (3ème année)</p>
+    </header>
+
+    <nav id="tabs">
+        <button class="tab-btn active" onclick="openTab(event, 'RT1')">RT1 - Concevoir</button>
+        <button class="tab-btn" onclick="openTab(event, 'RT2')">RT2 - Connecter</button>
+        <button class="tab-btn" onclick="openTab(event, 'RT3')">RT3 - Piloter</button>
+        <button class="tab-btn" onclick="openTab(event, 'Cyber1')">Cyber1 - Administrer</button>
+        <button class="tab-btn" onclick="openTab(event, 'Cyber2')">Cyber2 - Surveiller</button>
+    </nav>
+
+    <main>
+        <section id="RT1" class="section-content active">
+            <div class="level-header">
+                <h2>RT1 - Administrer les réseaux et l’Internet</h2>
+                <p><strong>Niveau 3 :</strong> Concevoir un réseau</p>
+            </div>
+            
+            <div class="global-reflexion">
+                <h3>Bilan Réflexif Global</h3>
+                <p>La conception du projet réseau a impliqué la prise en compte de la haute disponibilité, QoS, sécurité et supervision, avec une maquette de démonstration pour valider l'architecture. La défense du projet a été centrée sur les avantages pour l’entreprise. La communication avec les acteurs a été essentielle, avec des réunions régulières et des rapports d’avancement. Enfin, la gestion du projet a été réalisée en respectant les délais grâce à des outils de suivi.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC31.01</span>
+                        <h4>Concevoir un projet de réseau informatique d’une entreprise</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Après analyse des besoins, j’ai mis en place une architecture réseau avec redondance, gestion du trafic, sécurité des données et monitoring. Des améliorations sont possibles : renforcer la redondance avec des solutions de basculement automatique et améliorer la sécurité.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Doc Technique</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC31.03</span>
+                        <h4>Réaliser une maquette de démonstration du projet</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>La réalisation d’une maquette a permis de valider l'architecture réseau et de tester les différentes fonctionnalités avant la mise en production, en utilisant des outils de simulation.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Doc Technique</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC31.04</span>
+                        <h4>Défendre/argumenter un projet</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Défendre et argumenter un projet nécessite une préparation minutieuse. J’ai préparé une présentation claire en mettant en avant les avantages de nos projets (performance, sécurité, rentabilité).</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Doc</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC31.05</span>
+                        <h4>Communiquer avec les acteurs du projet</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>La communication a été essentielle pour garantir une bonne collaboration. J’ai organisé des réunions régulières, partagé des rapports d’avancement et écouté les besoins.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Doc</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC31.06</span>
+                        <h4>Gérer le projet et les étapes de mise en oeuvre</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>J’ai utilisé des outils de gestion de projet pour suivre les tâches et anticiper les retards. Pour améliorer, il serait utile d’établir des marges de sécurité dans les plannings.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="RT2" class="section-content">
+            <div class="level-header">
+                <h2>RT2 - Connecter les entreprises et les usagers</h2>
+                <p><strong>Niveau 3 :</strong> Déployer une solution de connexion ou de communication sur IP</p>
+            </div>
+
+            <div class="global-reflexion">
+                <h3>Bilan Réflexif Global</h3>
+                <p>La mise en place de connexions sécurisées a impliqué l'implémentation de solutions d’authentification forte et de connexions VPN. J’ai veillé à la gestion des droits d’accès. Dans le cadre de la collaboration en mode projet, j’ai facilité les échanges en alternant le français et l'anglais selon les besoins de l’équipe multiculturelle.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC32.04</span>
+                        <h4>Permettre aux collaborateurs de se connecter de manière sécurisée</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>J’ai mis en place des connexions VPN pour garantir la confidentialité des données, sécurisé les accès à distance et défini des politiques de gestion des mots de passe strictes.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Doc Technique</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC32.05</span>
+                        <h4>Collaborer en mode projet en français et en anglais</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>La collaboration a impliqué une communication fluide avec les équipes multiculturelles. J’ai participé à des réunions et rédigé des documents techniques dans les deux langues.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Doc Technique</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="RT3" class="section-content">
+            <div class="level-header">
+                <h2>RT3 - Créer des outils et des applications informatiques</h2>
+                <p><strong>Niveau 3 :</strong> Piloter un projet de développement d’une application R&T</p>
+            </div>
+
+            <div class="global-reflexion">
+                <h3>Bilan Réflexif Global</h3>
+                <p>L’élaboration du cahier des charges a été réalisée en analysant les besoins fonctionnels et techniques. La mise en place d’un environnement collaboratif a impliqué le choix d'outils adaptés. Le déploiement et la maintenance de la solution informatique ont été accompagnés de procédures de sauvegarde. J’ai suivi une veille technologique régulière pour rester informé des évolutions pertinentes.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC33.01</span>
+                        <h4>Élaborer les spécifications techniques et le cahier des charges</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Analyse approfondie des besoins fonctionnels et techniques. J’ai détaillé les exigences du client, les contraintes techniques, ainsi que les délais et budgets.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC33.02</span>
+                        <h4>Mettre en place un environnement de travail collaboratif</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>J’ai veillé à l’intégration des outils dans le flux de travail quotidien (messagerie, gestion de projets, partage de documents), en prenant en compte les besoins de l’équipe.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC33.03</span>
+                        <h4>Participer à la formation des utilisateurs</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Préparation de supports pédagogiques et conduite de sessions de formation sur l’utilisation des outils informatiques, adaptés aux niveaux de compétence des utilisateurs.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Supports</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC33.04</span>
+                        <h4>Déployer et maintenir une solution informatique</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Installation et configuration des logiciels. J’ai mis en place des procédures de sauvegarde et de mise à jour régulière pour assurer la pérennité de la solution.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC33.05</span>
+                        <h4>S’informer sur les évolutions technologiques</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Veille technologique régulière via des blogs, forums et publications spécialisées pour identifier les nouvelles technologies pertinentes pour les projets en cours.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC33.06</span>
+                        <h4>Sécuriser l’environnement numérique d’une application</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Mise en place de mécanismes de protection des données (cryptage, authentification forte) et réalisation de tests de vulnérabilité pour identifier les failles potentielles.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Cyber1" class="section-content">
+            <div class="level-header">
+                <h2>Cyber1 - Administrer un système d’information sécurisé</h2>
+                <p><strong>Niveau 2 :</strong> Mettre en oeuvre un système d’information sécurisé pour une petite structure</p>
+            </div>
+
+            <div class="global-reflexion">
+                <h3>Bilan Réflexif Global</h3>
+                <p>L’analyse de risques a permis d'identifier les vulnérabilités de la structure et d'implémenter des mesures de sécurité adaptées (pare-feu, gestion des mots de passe). J’ai installé des IDS, renforcé les contrôles d'accès, et sécurisé les OS via des mises à jour et le durcissement des politiques. Enfin, j'ai proposé une topologie réseau sécurisée garantissant le chiffrement et la sauvegarde des données.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC34.01</span>
+                        <h4>Participer à une analyse de risque et définir une politique de sécurité</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.02</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Identification des vulnérabilités et des menaces. J’ai aidé à définir les mesures de sécurité nécessaires (pare-feu, antivirus, formation) à partir de l'évaluation des risques liés aux actifs.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC34.02</span>
+                        <h4>Mettre en oeuvre des outils avancés de sécurisation</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Installation de pare-feu nouvelle génération, systèmes de détection d'intrusion (IDS), segmentation du réseau et renforcement des protocoles de chiffrement.</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC34.03</span>
+                        <h4>Sécuriser les systèmes d’exploitation</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Application des mises à jour, configuration de politiques de sécurité strictes, principe du moindre privilège et désactivation des services inutiles pour réduire la surface d’attaque.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC34.04</span>
+                        <h4>Proposer une architecture sécurisée de SI</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.01</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Définition d'une topologie réseau adaptée avec pare-feu, segmentation, solutions de sauvegarde sécurisée, et protocoles de chiffrement des données.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Architecture</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="Cyber2" class="section-content">
+            <div class="level-header">
+                <h2>Cyber2 - Surveiller un système d’information sécurisé</h2>
+                <p><strong>Niveau 2 :</strong> Mettre en oeuvre le système de surveillance d’incidents de sécurité</p>
+            </div>
+
+            <div class="global-reflexion">
+                <h3>Bilan Réflexif Global</h3>
+                <p>La surveillance a été assurée par des outils de monitoring en temps réel et des systèmes SIEM pour détecter les anomalies. En cas d'incident, j'ai appliqué des procédures de réponse rapide pour isoler les systèmes et collecter les preuves. L'administration des outils a impliqué l'optimisation des configurations et l'analyse continue des logs.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC35.01</span>
+                        <h4>Surveiller l’activité du système d’information</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.02</span>
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Mise en place d'outils de monitoring (SIEM) pour suivre en temps réel les performances du réseau, les accès utilisateurs et détecter toute activité anormale.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://github.com/TimotheeBer/SAE5.02-BERGER" target="_blank" class="btn-link">🔗 GitHub</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC35.03</span>
+                        <h4>Réagir face à un incident de sécurité</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Identification rapide de la menace, isolation des systèmes compromis, application des mesures correctives et collecte des preuves pour l'analyse post-incident.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Procédure</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="ac-code">AC35.04</span>
+                        <h4>Administrer les outils de surveillance du SI</h4>
+                        <div class="badges">
+                            <span class="badge">SAE5.03</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p>Configuration, maintien et optimisation des solutions de monitoring pour assurer une visibilité complète. Collecte des logs et configuration des alertes.</p>
+                    </div>
+                    <div class="card-footer">
+                        <a href="https://docs.google.com/document/d/1grv6q4X8Aj8VEgsxOkEzWUve2BJYAUuCqLmwyCNIqA0/edit?usp=sharing" target="_blank" class="btn-link">📄 Doc Admin</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Cacher toutes les sections
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("section-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
+
+            // Retirer la classe "active" de tous les boutons
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Afficher la section cliquée et ajouter la classe "active" au bouton
+            document.getElementById(tabName).style.display = "block";
+            // Un petit délai pour s'assurer que l'animation CSS se déclenche
+            setTimeout(() => {
+                document.getElementById(tabName).classList.add("active");
+            }, 10);
+            
+            evt.currentTarget.className += " active";
+        }
+    </script>
+</body>
+</html>
